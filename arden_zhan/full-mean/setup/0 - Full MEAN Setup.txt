@@ -1,0 +1,54 @@
+mkdir express-project
+cd express-project
+
+ng new client --routing --skip-git
+    - (angular project is called client)
+    - New tab, cd express-project
+    - code .
+
+npm init -y
+* edit package.json and npm install
+-----
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.3"
+  }
+-----
+npm install body-parser --save
+npm install express --save
+npm install express-session --save
+npm install mongoose --save
+
+touch server.js
+    - Require routes and mongoose configs
+    - Creates express app, loads configs onto it, and then tells it to listen
+
+mkdir server
+cd server
+mkdir config controllers models
+
+cd config
+touch routes.js mongoose.js
+    - routes
+        - specifies which routes will be handled and by which controller methods
+        - from routes, we require the controllers
+    - mongoose
+        - connects to the database and loads all the models
+        - specify a database to connect to and the path where all models are
+        - required by server.js
+
+cd ../controllers
+touch {{plural}}.js
+    - handles all the server-side logic, called upon by the routes
+    - interacts with preloaded models to run database commands
+    - controller sends response to the client
+    - there can be many controllers
+
+cd ../models
+touch {{singular}}.js
+    - specifies the schema to be loaded by mongoose
+    - required by mongoose config
+    - do not need to require the model in the controller, instead it's loaded from mongoose
+    - there can be many models
